@@ -67,17 +67,17 @@ namespace MovieLibrary
                             movieGenres.Add(addToGenres);
                         }
 
-                        sw.Write($"ID: {id}, Title: '{movieTitle}', Genre(s): ");
+                        sw.Write($"{id},{movieTitle},");
 
                         for(int i = 0; i < movieGenres.Count; i++)
                         {
                             if(i < movieGenres.Count - 1)
                             {
-                                Console.Write(movieGenres[i] + ", ");
+                                sw.Write(movieGenres[i] + "|");
                             }
                             else
                             {
-                                Console.Write(movieGenres[i]);
+                                sw.Write(movieGenres[i]);
                             }
                         }
                         Console.WriteLine("");

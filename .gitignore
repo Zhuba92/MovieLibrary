@@ -33,3 +33,15 @@ obj/Debug/netcoreapp3.1/NewMovieLibrary.AssemblyInfo.cs
 obj/Debug/netcoreapp3.1/NewMovieLibrary.AssemblyInfoInputs.cache
 obj/Debug/netcoreapp3.1/NewMovieLibrary.assets.cache
 obj/Debug/netcoreapp3.1/NewMovieLibrary.csprojAssemblyReference.cache
+bin/Debug/netcoreapp3.1/NewMovieLibrary.deps.json
+bin/Debug/netcoreapp3.1/NewMovieLibrary.dll
+bin/Debug/netcoreapp3.1/NewMovieLibrary.exe
+bin/Debug/netcoreapp3.1/NewMovieLibrary.pdb
+bin/Debug/netcoreapp3.1/NewMovieLibrary.runtimeconfig.dev.json
+bin/Debug/netcoreapp3.1/NewMovieLibrary.runtimeconfig.json
+obj/Debug/netcoreapp3.1/NewMovieLibrary.csproj.CoreCompileInputs.cache
+obj/Debug/netcoreapp3.1/NewMovieLibrary.csproj.FileListAbsolute.txt
+obj/Debug/netcoreapp3.1/NewMovieLibrary.dll
+obj/Debug/netcoreapp3.1/NewMovieLibrary.exe
+obj/Debug/netcoreapp3.1/NewMovieLibrary.genruntimeconfig.cache
+obj/Debug/netcoreapp3.1/NewMovieLibrary.pdb
