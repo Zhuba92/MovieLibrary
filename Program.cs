@@ -66,7 +66,7 @@ namespace MovieLibrary
                             string addToGenres = Console.ReadLine();
                             movieGenres.Add(addToGenres);
                         }
-
+                        sw.WriteLine("");
                         sw.Write($"{id},{movieTitle},");
 
                         for(int i = 0; i < movieGenres.Count; i++)
