@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections;
+using NLog.Web;
 
 namespace MovieLibrary 
 {
@@ -8,11 +9,16 @@ namespace MovieLibrary
     {
         static void Main(string[] args)
         {
-            int choice = 0;
+            string path = Directory.GetCurrentDirectory() + "\\nlog.config";
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog(path).GetCurrentClassLogger();
+            int choice;
             do
             {
                 Console.WriteLine("Type '1' to see all the movies" + "\n" + "Type '2' to add a movie to the list" + "\n" + "Type '0' to exit");
-                choice = Convert.ToInt32(Console.ReadLine());
+                if(!int.TryParse(Console.ReadLine(), out choice))
+                {
+                    logger.Trace("Not a valid entry");
+                }
                 string file = "movies.csv";
                 
                 if(choice == 1)
@@ -58,7 +64,11 @@ namespace MovieLibrary
 
                         var movieGenres = new ArrayList();
                         Console.WriteLine("How many genres does this movie fit into? ");
-                        int numGenres = Convert.ToInt32(Console.ReadLine());
+                        int numGenres;
+                        if(!int.TryParse(Console.ReadLine(), out numGenres))
+                        {
+                            Console.WriteLine("Not a number");
+                        }
 
                         for(int i = 0; i < numGenres; i++)
                         {
