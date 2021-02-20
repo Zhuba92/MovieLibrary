@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
-using System.Collections;
+using System.Collections.Generic;
 using NLog.Web;
+using System.Linq;
+using System.Collections;
 
 namespace MovieLibrary 
 {
@@ -12,19 +14,20 @@ namespace MovieLibrary
             string path = Directory.GetCurrentDirectory() + "\\nlog.config";
             var logger = NLog.Web.NLogBuilder.ConfigureNLog(path).GetCurrentClassLogger();
             int choice;
+            List<String> movieList = new List<string>();
+            
             do
             {
                 Console.WriteLine("Type '1' to see all the movies" + "\n" + "Type '2' to add a movie to the list" + "\n" + "Type '0' to exit");
                 if(!int.TryParse(Console.ReadLine(), out choice))
                 {
-                    logger.Trace("Not a valid entry");
+                    Console.WriteLine("Not a valid choice!");
                 }
                 string file = "movies.csv";
                 
                 if(choice == 1)
-                {
+                {                  
                     StreamReader sr = new StreamReader(file);
-                    
                     while(!sr.EndOfStream)
                     {
                         string movieInfo = sr.ReadLine();
@@ -32,8 +35,9 @@ namespace MovieLibrary
                         string movieID = movieInfoParts[0];
                         string movieTitle = movieInfoParts[1];
                         string[] genres = movieInfoParts[2].Split("|");
+                        movieList.Add(movieTitle);
 
-                        Console.Write($"ID: {movieID}, Title: '{movieTitle}', Genre(s): ");
+                        Console.Write($"ID: {movieID}, Title: {movieTitle}, Genre(s): ");
 
                         for(int i = 0; i < genres.Length; i++)
                         {
@@ -60,38 +64,44 @@ namespace MovieLibrary
                         string id = Console.ReadLine();
 
                         Console.WriteLine("What is the title of the movie?");
-                        string movieTitle = Console.ReadLine();
-
-                        var movieGenres = new ArrayList();
-                        Console.WriteLine("How many genres does this movie fit into? ");
-                        int numGenres;
-                        if(!int.TryParse(Console.ReadLine(), out numGenres))
+                        string movieTitle2 = Console.ReadLine();
+                        if(movieList.Contains(movieTitle2))
                         {
-                            Console.WriteLine("Not a number");
+                            Console.WriteLine("Movie exists already");
                         }
-
-                        for(int i = 0; i < numGenres; i++)
+                        else
                         {
-                            Console.WriteLine("Please enter the name of the genre:");
-                            string addToGenres = Console.ReadLine();
-                            movieGenres.Add(addToGenres);
-                        }
-                        sw.WriteLine("");
-                        sw.Write($"{id},{movieTitle},");
-
-                        for(int i = 0; i < movieGenres.Count; i++)
-                        {
-                            if(i < movieGenres.Count - 1)
+                            var movieGenres = new ArrayList();
+                            Console.WriteLine("How many genres does this movie fit into? ");
+                            int numGenres;
+                            if(!int.TryParse(Console.ReadLine(), out numGenres))
                             {
-                                sw.Write(movieGenres[i] + "|");
+                                Console.WriteLine("Not a number");
                             }
-                            else
+
+                            for(int i = 0; i < numGenres; i++)
                             {
-                                sw.Write(movieGenres[i]);
+                                Console.WriteLine("Please enter the name of the genre:");
+                                string addToGenres = Console.ReadLine();
+                                movieGenres.Add(addToGenres);
                             }
+                            sw.WriteLine("");
+                            sw.Write($"{id},{movieTitle2},");
+
+                            for(int i = 0; i < movieGenres.Count; i++)
+                            {
+                                if(i < movieGenres.Count - 1)
+                                {
+                                    sw.Write(movieGenres[i] + "|");
+                                }
+                                else
+                                {
+                                    sw.Write(movieGenres[i]);
+                                }
+                            }
+                            Console.WriteLine("");
+                            sw.Close();
                         }
-                        Console.WriteLine("");
-                        sw.Close();
                     } 
                 }
             }while(choice != 0);
